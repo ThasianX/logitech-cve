@@ -2,11 +2,9 @@
 #include "mouse.h"
 #include <stdio.h>
 
-int main(void)
-{
-	if (!mouse_open()) {
+int main(void) {
+	if (!open_mouse()) {
 		printf("[-] failed to open ghub macro driver\n");
-		return 0;
 	}
 
 
@@ -14,10 +12,9 @@ int main(void)
 		Sleep(100);
 		printf("[+] moving mouse\n");
 
-		mouse_move(0, -10, 0, 0);
+		move_mouse(0, 10);
 	}
 
-
-	mouse_close();
+	while (true) {}
 }
 
