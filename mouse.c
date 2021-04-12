@@ -1,5 +1,7 @@
 #include <windows.h>
 #include <winternl.h>
+#include <math.h>
+#include <stdio.h>
 #include "mouse.h"
 #pragma comment(lib, "ntdll.lib")
 
@@ -47,6 +49,8 @@ void close_mouse() {
 	mouse_file_handle = 0;
 }
 
+double maxDistancePerStep = 127.0;
+
 /*
  * Function:  send_mouse_message
  * --------------------
@@ -85,8 +89,18 @@ void press_out_mouse() {
 	send_mouse_message(0, 0, 0, 0);
 }
 
-void move_mouse(char x, char y) {
-	send_mouse_message(0, x, y, 0);
+void move_mouse(int x, int y) {
+	int stepsForX = (int) ceil(abs(x) / maxDistancePerStep);
+	int stepsForY = (int) ceil(abs(y) / maxDistancePerStep);
+	int steps = max(stepsForX, stepsForY);
+
+	int i = 0;
+	int xStep = x / steps;
+	int yStep = y / steps;
+	while (i < steps) {
+		send_mouse_message(0, xStep, yStep, 0);
+		i++;
+	}
 }
 
 void move_wheel(char wheel) {

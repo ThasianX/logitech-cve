@@ -19,7 +19,7 @@ void left_press_in_mouse();
 void middle_press_in_mouse();
 void right_press_in_mouse();
 void press_out_mouse();
-void move_mouse(char x, char y);
+void move_mouse(int x, int y);
 void move_wheel(char wheel);
 void button_press_in(char button);
 

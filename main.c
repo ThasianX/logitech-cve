@@ -7,13 +7,7 @@ int main(void) {
 		printf("[-] failed to open ghub macro driver\n");
 	}
 
-
-	for (int i = 0; i < 32; i++) {
-		Sleep(100);
-		printf("[+] moving mouse\n");
-
-		move_mouse(0, 10);
-	}
+	move_mouse(-535, -190);
 
 	while (true) {}
 }
